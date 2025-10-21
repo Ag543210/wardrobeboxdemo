@@ -76,7 +76,6 @@ function App() {
         </div>
       );
     }
-
     if (step === "chat") {
       return (
         <div className="max-w-md mx-auto mt-10">
