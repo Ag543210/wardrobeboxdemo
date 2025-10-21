@@ -2,38 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tema */
-:root{
-  --lux-bg-1:#0c0c0d;
-  --lux-bg-2:#171718;
-  --lux-gold:#d4a373;
-  --lux-gold-2:#f1c98a;
-  --lux-text:#f4f4f5;
-}
-
-/* Bakgrund & font */
+/* Bakgrund */
 body{
-  background: radial-gradient(80rem 60rem at 20% -10%, #2a2317 0%, transparent 35%),
-              radial-gradient(60rem 50rem at 120% 20%, #2b1f12 0%, transparent 40%),
-              linear-gradient(180deg, var(--lux-bg-1), var(--lux-bg-2));
-  color: var(--lux-text);
-  font-family: Inter, system-ui, sans-serif;
+  --gold:#d4a373;
+  --gold2:#f1c98a;
+  --bg1:#0b0b0c; --bg2:#171718;
+  background:
+    radial-gradient(70rem 50rem at 20% -10%, #2b1f12 0%, transparent 40%),
+    radial-gradient(60rem 40rem at 120% 20%, #2a2317 0%, transparent 45%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
 }
 
-/* Komponenter */
-@layer components{
-  .container-xl{ @apply max-w-5xl mx-auto px-6; }
-  .btn-gold{
-    @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold transition;
-    background: linear-gradient(180deg, var(--lux-gold-2), var(--lux-gold));
-    color:#231a12; box-shadow: 0 8px 24px rgba(212,163,115,.25);
-  }
-  .btn-gold:hover{ filter: brightness(1.05); transform: translateY(-1px); }
-  .btn-ghost{ @apply rounded-2xl px-5 py-3 border border-[#d4a37366] text-gray-200 hover:bg-white/5; }
-  .card{
-    @apply rounded-3xl p-6 border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_10px_40px_rgba(0,0,0,.25)];
-  }
-  .h1{ @apply text-4xl md:text-5xl font-extrabold; letter-spacing: .2px; }
-  .h2{ @apply text-2xl md:text-3xl font-bold; }
-  .muted{ @apply text-gray-300; }
+/* Containers & text */
+.container-xl{ @apply max-w-6xl mx-auto px-6; }
+.hero-title{ @apply text-4xl md:text-6xl font-extrabold tracking-tight; }
+.hero-sub{ @apply text-lg md:text-xl text-white/80 max-w-3xl mx-auto; }
+.section-title{ @apply text-2xl md:text-3xl font-bold; }
+.section-sub{ @apply text-white/70; }
+.card-title{ @apply text-lg font-semibold; }
+.muted{ @apply text-white/70; }
+
+/* Buttons & cards */
+.btn-gold{
+  @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold transition;
+  background: linear-gradient(180deg, var(--gold2), var(--gold));
+  color:#231a12; box-shadow: 0 10px 28px rgba(212,163,115,.25);
 }
+.btn-gold:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+.btn-ghost{ @apply rounded-2xl px-5 py-3 border border-[#d4a37366] text-white/90 hover:bg-white/5; }
+.card{
+  @apply rounded-3xl p-6 border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,.25)];
+}
+.hover-card{ transition: transform .25s ease, box-shadow .25s ease; }
+.hover-card:hover{ transform: translateY(-2px); box-shadow: 0 18px 60px rgba(0,0,0,.35); }
+.price{ @apply text-[color:var(--gold)] font-bold; }
+.nav-link{ @apply text-white/80 hover:text-white; }
+.drop-glow{ filter: drop-shadow(0 0 14px rgba(212,163,115,.35)); }
+.hero-box{ box-shadow: 0 24px 120px rgba(212,163,115,.22); }
+
+/* Assistant */
+.badge{ @apply text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-white/70; }
+.close{ @apply text-white/70 hover:text-white; }
+.chat{ @apply h-64 overflow-y-auto rounded-2xl bg-black/30 border border-white/10 p-3; }
+.msg{ @apply inline-block px-3 py-2 rounded-2xl mb-2; }
+.msg.me{ background: var(--gold); color:#231a12; @apply ml-auto block max-w-[85%]; }
+.msg.bot{ @apply bg-white/10 text-white/90 block max-w-[85%]; }
+.input{ @apply flex-1 rounded-2xl bg-black/40 border border-white/10 px-4 py-3 outline-none focus:border-[color:var(--gold)]; }
+
+/* Fade on mount */
+body{ opacity: 0; transition: opacity .6s ease; }
+body.mounted{ opacity: 1; }
+
+/* Simple fade utility */
+@keyframes fadeIn { from{opacity:0; transform: translateY(6px);} to{opacity:1; transform:none;} }
+.animate-fade-in{ animation: fadeIn .7s ease both; }
